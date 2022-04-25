@@ -10,56 +10,124 @@
                     <div class="panel-heading">Form Fill UP </div>
                     <div class="panel-body">
 
-                            <form class="form-horizontal" method="POST" action="{!! route('form.store') !!}">
-                                @csrf
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Name</label>
-                                <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror form-control">
-                                @error('name')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email</label>
-                                <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror form-control">
-                                @error('email')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Phone</label>
-                                <input type="email" id="email" name="phone" class="@error('phone') is-invalid @enderror form-control">
-                                @error('phone')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Subject</label>
-                                <input type="email" id="email" name="subject" class="@error('subject') is-invalid @enderror form-control">
-                                @error('subject')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Message</label>
-                                <textarea name="message" class="@error('message') is-invalid @enderror form-control"></textarea>
-                                @error('message')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group mt-4 mb-4">
-                                <div class="captcha">
-                                    <span>{!! captcha_img() !!}</span>
-                                    <button type="button" class="btn btn-danger" class="reload" id="reload">
-                                        ↻
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="form-group mb-4">
-                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+
+                                <form class="form-horizontal" method="POST" action="{{route('form.store') }}">
+                                    {{ csrf_field() }}
+
+
+                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                        <label for="name" class="col-md-4 control-label">E-Mail Address</label>
+
+
+                                        <div class="col-md-6">
+                                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+
+
+                                            @if ($errors->has('name'))
+                                                <span class="help-block">
+                                                    <div class="alert alert-danger mt-1 mb-1"> <strong>{{ $errors->first('name') }}</strong> </div>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+
+                                        <div class="col-md-6">
+                                            <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}">
+
+
+                                            @if ($errors->has('email'))
+                                                <span class="help-block">
+                                                    <div class="alert alert-danger mt-1 mb-1"> <strong>{{ $errors->first('email') }}</strong> </div>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                        <label for="phone" class="col-md-4 control-label">Phone</label>
+
+
+                                        <div class="col-md-6">
+                                            <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
+
+
+                                            @if ($errors->has('phone'))
+                                                <span class="help-block">
+                                                     <div class="alert alert-danger mt-1 mb-1"> <strong>{{ $errors->first('phone') }}</strong> </div>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group{{ $errors->has('subject') ? ' has-error' : '' }}">
+                                        <label for="subject" class="col-md-4 control-label">Subject</label>
+
+
+                                        <div class="col-md-6">
+                                            <input id="subject" type="text" class="form-control" name="subject" value="{{ old('subject') }}">
+
+
+                                            @if ($errors->has('subject'))
+                                                <span class="help-block">
+                                                     <div class="alert alert-danger mt-1 mb-1"> <strong>{{ $errors->first('subject') }}</strong> </div>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
+                                        <label for="message" class="col-md-4 control-label">Message</label>
+
+
+                                        <div class="col-md-6">
+                                            <textarea id="message" type="text" class="form-control" name="message" value="{{ old('message') }}">
+                                            </textarea>
+
+
+                                            @if ($errors->has('message'))
+                                                <span class="help-block">
+                                                     <div class="alert alert-danger mt-1 mb-1"> <strong>{{ $errors->first('message') }}</strong> </div>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                                        <label for="password" class="col-md-4 control-label">Captcha</label>
+
+
+                                        <div class="col-md-6">
+                                            <div class="captcha">
+                                                <span>{!! captcha_img() !!}</span>
+                                                <button type="button" class="btn btn-success btn-refresh">reload</button>
+                                            </div>
+                                            <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+
+
+                                            @if ($errors->has('captcha'))
+                                                <span class="help-block">
+                                                     <div class="alert alert-danger mt-1 mb-1"> <strong>{{ $errors->first('captcha') }}</strong> </div>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-8 col-md-offset-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
 
                     </div>
                 </div>
