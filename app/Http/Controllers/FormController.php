@@ -35,14 +35,14 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-//            'name' => 'required',
-//            'email' => 'required',
-//            'phone' => 'required',
-//            'subject' => 'required',
-//            'message' => 'required',
-//            'captcha' => 'required|captcha'
-//        ]);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+            'captcha' => 'required|captcha'
+        ],['captcha.captcha'=>'Invalid captcha code.']);
 
 
         $value= Form::create([
@@ -51,7 +51,6 @@ class FormController extends Controller
             'phone'=> $request->phone,
             'subject'=> $request->subject,
             'message'=> $request->message,
-
 
         ]);
 

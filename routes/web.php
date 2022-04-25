@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('/form', FormController::class);
-Route::get('/reload-captcha', [FormController::class, 'reloadCaptcha']);
+Route::get('reload-captcha', [FormController::class, 'reloadCaptcha']);
 
 
 Auth::routes();
@@ -32,7 +32,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/form', [App\Http\Controllers\Admin\Formcontroller::class, 'index'])->name('admin.form.index');
 });
 
-Route::get('/logout', function () {
-    Auth::logout();
-    return redirect()->route('login')->with('success', 'Successfully Logged Out.');
-})->name('logout');
+
