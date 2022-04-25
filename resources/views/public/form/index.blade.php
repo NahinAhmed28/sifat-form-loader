@@ -105,7 +105,7 @@
 
 
                             <form class="form-horizontal" method="POST" action="{!! route('form.store') !!}">
-                                {{ csrf_field() }}
+                                @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Name</label>
                                 <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror form-control">
